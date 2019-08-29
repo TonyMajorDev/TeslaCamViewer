@@ -101,7 +101,10 @@ namespace TeslaCamViewer
 
         private void MediaElement_MediaOpened(object sender, RoutedEventArgs e)
         {
-            TotalTime = left.NaturalDuration.TimeSpan;
+            if ((sender as MediaElement).NaturalDuration.HasTimeSpan)
+                if ((sender as MediaElement).NaturalDuration.TimeSpan.TotalSeconds > 0)
+                    TotalTime = (sender as MediaElement).NaturalDuration.TimeSpan;
+
             var timerVideoTime = new DispatcherTimer();
             timerVideoTime.Interval = TimeSpan.FromMilliseconds(100);
             timerVideoTime.Tick += new EventHandler(timer_Tick);
