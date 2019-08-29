@@ -1,8 +1,8 @@
-![TeslaCamViewerIcon](https://github.com/mattw01/TeslaCamViewer/blob/master/TeslaCamViewer/TeslaCamViewerIcon_64px.png?raw=true)
+![TeslaCamViewerIcon](https://github.com/TonyMajorDev/TeslaCamViewer/blob/master/TeslaCamViewer/TeslaCamViewerIcon_64px.png?raw=true)
 # TeslaCam Viewer
 A simple TeslaCam recording viewer to easily sort recordings and view all cameras at once.
 
-### [Download the Current Release Version](https://github.com/mattw01/TeslaCamViewer/releases/download/v0.4.1/TeslaCamViewer_V0.4.1.zip)
+### [Install the Current Version](https://tonymajordev.github.io/TeslaCamViewer/TeslaCamViewer/TeslaCamViewer/publish/)
 
 ## Features
 - View and sync all 3 cameras at once
@@ -15,9 +15,9 @@ A simple TeslaCam recording viewer to easily sort recordings and view all camera
 - F: Enter/Exit Fullscreen
 - Esc: Exit Fullscreen
 
-Looking to buy a Tesla? [Use my referral code!](https://ts.la/matthew69102)
+Looking to buy a Tesla? [Use my referral code!](https://ts.la/anthony98852)
 
 ## Screenshots
-![BrowseMenu](https://github.com/mattw01/TeslaCamViewer/blob/master/TeslaCamViewer/Screenshots/BrowseMenu1.PNG?raw=true)
-![BrowseScrubDemo](https://github.com/mattw01/TeslaCamViewer/blob/master/TeslaCamViewer/Screenshots/BrowseScrub1.gif?raw=true)
-![BrowseScrubDemo](https://github.com/mattw01/TeslaCamViewer/blob/master/TeslaCamViewer/Screenshots/PlayMenu1.PNG?raw=true)
+![BrowseMenu](https://github.com/TonyMajorDev/TeslaCamViewer/blob/master/TeslaCamViewer/Screenshots/BrowseMenu1.PNG?raw=true)
+![BrowseScrubDemo](https://github.com/TonyMajorDev/TeslaCamViewer/blob/master/TeslaCamViewer/Screenshots/BrowseScrub1.gif?raw=true)
+![BrowseScrubDemo](https://github.com/TonyMajorDev/TeslaCamViewer/blob/master/TeslaCamViewer/Screenshots/PlayMenu1.PNG?raw=true)
