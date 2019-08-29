@@ -27,6 +27,8 @@ namespace TeslaCamViewer.Views
             this.mainModel = mainModel;
             this.DataContext = data;
             InitializeComponent();
+
+            
         }
         private void OnItemMouseDoubleClick(object sender, MouseButtonEventArgs args)
         {

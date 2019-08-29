@@ -39,7 +39,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel HorizontalAlignment="Center">
-                        <MediaElement Source="{Binding ThumbnailVideo.FileURI}" LoadedBehavior="Pause" ScrubbingEnabled="True" 
+                        <MediaElement x:Name="mePrimaryView" Source="{Binding ThumbnailVideo.FileURI}" LoadedBehavior="Pause" ScrubbingEnabled="True" 
                                       Height="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},Path=DataContext.ThumbnailSize}"
                                       Width="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},Path=DataContext.ThumbnailSize}" 
                                       MouseMove="MediaElement_MouseMove" />

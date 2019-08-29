@@ -66,12 +66,19 @@ namespace TeslaCamViewer.Views
         EventCollectionViewModel model;
         public EventCollectionView(TeslaCamEventCollection data, MainWindowViewModel mainModel)
         {
+            //string[] trackstream = new string[] { @"C:\Users\Public\Music\Sample Music\sound.wma" };
+
             this.model = new EventCollectionViewModel();
             model.EventData = data;
 
             this.mainModel = mainModel;
             this.DataContext = model;
             InitializeComponent();
+
+            //InitializeComponent();
+
+            //meThumbnail.Source = new Uri(trackstream[0], UriKind.Absolute);
+
         }
         private void OnItemMouseDoubleClick(object sender, MouseButtonEventArgs args)
         {

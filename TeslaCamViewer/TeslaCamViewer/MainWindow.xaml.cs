@@ -34,9 +34,11 @@ namespace TeslaCamViewer
             left.Stop();
             right.Stop();
             front.Stop();
+
             bool playLeft = false;
             bool playRight = false;
             bool playFront = false;
+
             foreach (var cam in set.Cameras)
             {
                 if (cam.CameraLocation == TeslaCamFile.CameraType.FRONT)
@@ -59,6 +61,10 @@ namespace TeslaCamViewer
             if (playLeft) left.Play();
             if (playRight) right.Play();
             if (playFront) front.Play();
+            
+            //playPause_Button.Content = "4";  // 4 is the pause symbol in webdings font
+
+
             this.tabs.SelectedIndex = 1;
         }
     }
@@ -85,6 +91,8 @@ namespace TeslaCamViewer
             model.VideoModel.right = this.right;
             model.VideoModel.front = this.front;
             model.VideoModel.tabs = this.tabs;
+
+                        playbackSpeed_Slider_DragDelta(null, null);
         }
 
 
@@ -122,6 +130,8 @@ namespace TeslaCamViewer
             left.Pause();
             right.Pause();
             front.Pause();
+
+            playPause_Button.Content = "4";  // 4 is the pause symbol in webdings font
         }
 
         private void timeSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
@@ -129,6 +139,10 @@ namespace TeslaCamViewer
             left.Play();
             right.Play();
             front.Play();
+
+            playPause_Button.Content = ";";  // ; is the pause symbol in webdings font
+
+            System.Diagnostics.Debug.WriteLine("timeSlider_DragCompleted.  playing");
         }
 
         private void timeSlider_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
@@ -188,9 +202,13 @@ namespace TeslaCamViewer
                 {
                     // Get all drives
                     var drives = System.IO.DriveInfo.GetDrives();
-                    drives = drives.Where(e => e.DriveType == DriveType.Removable ||
-                        e.DriveType == DriveType.Network ||
-                        e.DriveType == DriveType.Fixed).ToArray();
+                    //drives = drives.Where(e => e.DriveType == DriveType.Removable ||
+                    //    e.DriveType == DriveType.Network ||
+                    //    e.DriveType == DriveType.Fixed).ToArray();
+
+                    drives = drives.Where(e => e.DriveType == DriveType.Removable && e.IsReady ||
+                        e.DriveType == DriveType.Network && e.IsReady ||
+                        e.DriveType == DriveType.Fixed && e.IsReady).ToArray();
 
                     // Find the first drive containing a TeslaCam folder and select that folder
                     teslaCamDir = (from drive in drives
@@ -261,12 +279,14 @@ namespace TeslaCamViewer
                 left.Play();
                 right.Play();
                 front.Play();
+                (sender as Button).Content = ";";  // ; is the pause symbol in webdings font
             }
             else
             {
                 left.Pause();
                 right.Pause();
                 front.Pause();
+                (sender as Button).Content = "4";  // 4 is the play symbol in webdings font
             }
             paused = !paused;
         }
@@ -371,6 +391,9 @@ namespace TeslaCamViewer
         }
         public static TreeViewItem FindTviFromObjectRecursive(ItemsControl ic, object o)
         {
+            if (ic == null)
+                return null;
+
             TreeViewItem tvi = ic.ItemContainerGenerator.ContainerFromItem(o) as TreeViewItem;
             if (tvi != null) return tvi;
             foreach (object i in ic.Items)
@@ -387,6 +410,13 @@ namespace TeslaCamViewer
             this.left.SpeedRatio = model.CalculatedPlaybackSpeed;
             this.right.SpeedRatio = model.CalculatedPlaybackSpeed;
             this.front.SpeedRatio = model.CalculatedPlaybackSpeed;
+        }
+
+
+
+        private async void NotImplemented_Click(object sender, RoutedEventArgs e)
+        {
+            await this.ShowMessageAsync("Not Implemented", "Feature is not yet implemented. ");
         }
     }
 }

@@ -28,7 +28,7 @@
                 <DataTemplate>
                     <Grid Height="80">
                         <StackPanel Orientation="Horizontal">
-                            <MediaElement Source="{Binding ThumbnailVideo.FileURI}" LoadedBehavior="Pause" ScrubbingEnabled="True" Height="75" Width="75" />
+                            <MediaElement x:Name="meThumbnail" Source="{Binding ThumbnailVideo.FileURI}" LoadedBehavior="Pause" ScrubbingEnabled="True" Height="75" Width="75" />
                             <TextBlock Text="{Binding StartDate.DisplayValue}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe UI Light" Margin="10,0,0,0"/>
                         </StackPanel>
                     </Grid>

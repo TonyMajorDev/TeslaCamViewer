@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:TeslaCamViewer"
+        xmlns:p="clr-namespace:TeslaCamViewer.Properties"
         mc:Ignorable="d"           
         Title="TeslaCam Viewer V0.4.1" TitleCaps="False" Height="525" Width="817"
                         AllowDrop="True"  Drop="Window_Drop" KeyUp="MetroWindow_KeyUp"
@@ -31,7 +32,7 @@
                     <MenuItem Header="_Automatically Play Next Clip" IsCheckable="True" IsChecked="{Binding EnableAutoPlaylist}"/>
                     <MenuItem Header="Playback Speed" IsEnabled="False"/>
                     <Slider x:Name="playbackSpeed_Slider" Width ="190px" Minimum="-50" Maximum="50" TickPlacement="BottomRight" Ticks="0" 
-                            Value="{Binding DisplayPlaybackSpeed}" Thumb.DragDelta="playbackSpeed_Slider_DragDelta" />
+                            Value="{Binding DisplayPlaybackSpeed}"  Thumb.DragDelta="playbackSpeed_Slider_DragDelta" />
                 </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem Header="_View TeslaCam Viewer on GitHub" x:Name="viewOnGitHub_Menu" Click="viewOnGitHub_Menu_Click"/>
@@ -65,6 +66,7 @@
         ItemsSource="{Binding Recordings}">
                             <StackPanel Orientation="Horizontal" Margin="2">
                                 <TextBlock Text="{Binding StartDate.DisplayValue}" />
+                                <Image Source="erase_delete_remove_wipe_out-512.png" Margin="7,0,0,0"  Height="10" Width="10" />
                             </StackPanel>
                         </HierarchicalDataTemplate>
                         <HierarchicalDataTemplate
@@ -78,6 +80,8 @@
                                 </StackPanel.ContextMenu>-->
                                 <!--<CheckBox IsChecked="{Binding IsSelected}"/>-->
                                 <TextBlock Text="{Binding Date.DisplayValue}" />
+                                <Image Source="erase_delete_remove_wipe_out-512.png" Margin="7,0,0,0"  Height="10" Width="10" />
+
                             </StackPanel>
                         </HierarchicalDataTemplate>
                     </TreeView.Resources>
@@ -92,7 +96,7 @@
             <TabControl x:Name="tabs" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <TabItem Header="Browse">
                     <Frame x:Name="browseFrame"  NavigationUIVisibility="Hidden">
-                        
+
                     </Frame>
                 </TabItem>
                 <TabItem Header="Play">
@@ -108,13 +112,20 @@
                                 <RowDefinition Height="{Binding BottomVideoRowHeight}" />
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0" >
-                                <MediaElement x:Name="front" LoadedBehavior="Manual" ScrubbingEnabled="True">
+
+                                <MediaElement x:Name="front" LoadedBehavior="Manual" ScrubbingEnabled="True" Margin="100,0,100,0">
                                     <MediaElement.InputBindings>
                                         <MouseBinding Gesture="LeftDoubleClick" Command="{Binding SelectFullVideo}" 
                                                       CommandParameter="{x:Static local:TeslaCamFile+CameraType.FRONT}" />
                                     </MediaElement.InputBindings>
                                 </MediaElement>
-                                
+                                <Button x:Name="btnDel3" Content="Delete 3" Margin="0,10,10.333,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Right" Width="65" Command="{Binding Delete3}" 
+                                                      CommandParameter="{x:Static local:TeslaCamFile+CameraType.FRONT}" Click="NotImplemented_Click" />
+                                <Button x:Name="btnDelSet" Content="Delete Set" Margin="0,44,10.333,0" HorizontalAlignment="Right" Width="65" Height="29" VerticalAlignment="Top" Command="{Binding DeleteSet}" 
+                                                      CommandParameter="{x:Static local:TeslaCamFile+CameraType.FRONT}"  Click="NotImplemented_Click"/>
+                                <Button x:Name="btnArchive3" Content="Archive 3" Margin="0,78,10.333,0" HorizontalAlignment="Right" Width="65" Height="29" VerticalAlignment="Top" Command="{Binding Archive3}" 
+                                                      CommandParameter="{x:Static local:TeslaCamFile+CameraType.FRONT}"  Click="NotImplemented_Click"/>
+
                             </Grid>
                             <GridSplitter Margin="2" Height="2" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="DarkRed" />
                             <Grid Grid.Row="2">
@@ -143,13 +154,14 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Button x:Name="playPause_Button" Click="playPause_Button_Click"  Content="►" Width="30" Height="30"  Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" FontFamily="Arial" FontSize="16"/>
+                            <Button x:Name="playPause_Button" Click="playPause_Button_Click"  Content=";" Width="30" Height="30"  Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" FontFamily="Webdings" FontSize="16"/>
 
                             <Slider Height="30"  x:Name="timeSlider" Grid.Column="1"  Minimum="0" Maximum="1" SmallChange="0.05" LargeChange="0.1" 
                 Thumb.DragStarted="timeSlider_DragStarted" Thumb.DragCompleted="timeSlider_DragCompleted" Thumb.DragDelta="timeSlider_DragDelta" />
                         </Grid>
                     </Grid>
                 </TabItem>
+
             </TabControl>
 
         </Grid>
@@ -160,6 +172,7 @@
             <StatusBarItem>
                 <TextBlock></TextBlock>
             </StatusBarItem>
+
 
         </StatusBar>
     </Grid>

@@ -12,6 +12,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System;
+using System.IO;
+using System.Collections.Generic;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace TeslaCamViewer
 {
@@ -85,18 +89,19 @@ namespace TeslaCamViewer
             }
         }
 
-        private double _DisplayPlaybackSpeed;
         public double DisplayPlaybackSpeed
         {
             get
             {
-                return this._DisplayPlaybackSpeed;
+                return Properties.Settings.Default.PlaybackSpeed;
             }
             set
             {
-                if (value != this._DisplayPlaybackSpeed)
+                if (value != Properties.Settings.Default.PlaybackSpeed)
                 {
-                    this._DisplayPlaybackSpeed = value;
+                    Properties.Settings.Default.PlaybackSpeed = value;
+                    Properties.Settings.Default.Save();
+
                     NotifyPropertyChanged();
                     NotifyPropertyChanged("CalculatedPlaybackSpeed");
                 }
@@ -199,8 +204,41 @@ namespace TeslaCamViewer
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public ICommand Delete3 { get { return new DelegateCommand(DeleteVideos); } }
+        public ICommand DeleteSet { get { return new DelegateCommand(DeleteVideos); } }
+        public ICommand Archive3 { get { return new DelegateCommand(ArchiveVideos); } }
+
+        private void DeleteVideos(object whichVideos)
+        {
+            // Skip to the next video, then 
+            var deleteSet = new List<string>();
+
+            foreach (var aCamera in this.CurrentPlaybackFile.Cameras) deleteSet.Add(aCamera.FilePath);
+
+            // skip to next video here
+            
+
+            //foreach (var aFile in deleteSet) File.Delete(aFile);
+            
+            //File.Delete(aCamera.FilePath);
+
+            System.Diagnostics.Debug.WriteLine(whichVideos);
+
+            //MessageBox.Show("Feature is not yet implemented. ");
+        }
+
+        private void ArchiveVideos(object whichVideos)
+        {
+            //MessageBox.Show("Feature is not yet implemented. ");
+
+            System.Diagnostics.Debug.WriteLine(whichVideos);
+        }
+
+
         public ICommand SelectFullVideo { get { return new DelegateCommand(DisplayFullVideo); } }
         private TeslaCamFile.CameraType CurrentFullVideo;
+
         private void DisplayFullVideo(object Camera)
         {
             if (Camera is TeslaCamFile.CameraType)
