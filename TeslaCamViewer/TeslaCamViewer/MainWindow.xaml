@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:TeslaCamViewer"
         xmlns:p="clr-namespace:TeslaCamViewer.Properties"
         mc:Ignorable="d"           
-        Title="TeslaCam Viewer V0.4.1" TitleCaps="False" Height="525" Width="817"
+        Title="TeslaCam Viewer" TitleCaps="False" Height="525" Width="817"
                         AllowDrop="True"  Drop="Window_Drop" KeyUp="MetroWindow_KeyUp"
                       Loaded="MetroWindow_Loaded">
     <Grid>
@@ -66,7 +66,7 @@
         ItemsSource="{Binding Recordings}">
                             <StackPanel Orientation="Horizontal" Margin="2">
                                 <TextBlock Text="{Binding StartDate.DisplayValue}" />
-                                <Image Source="erase_delete_remove_wipe_out-512.png" Margin="7,0,0,0"  Height="10" Width="10" />
+                                <!--<Image Source="erase_delete_remove_wipe_out-512.png" Margin="7,0,0,0"  Height="10" Width="10" />-->
                             </StackPanel>
                         </HierarchicalDataTemplate>
                         <HierarchicalDataTemplate
@@ -80,7 +80,7 @@
                                 </StackPanel.ContextMenu>-->
                                 <!--<CheckBox IsChecked="{Binding IsSelected}"/>-->
                                 <TextBlock Text="{Binding Date.DisplayValue}" />
-                                <Image Source="erase_delete_remove_wipe_out-512.png" Margin="7,0,0,0"  Height="10" Width="10" />
+                                <!--<Image Source="erase_delete_remove_wipe_out-512.png" Margin="7,0,0,0"  Height="10" Width="10" />-->
 
                             </StackPanel>
                         </HierarchicalDataTemplate>

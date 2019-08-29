@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Deployment.Application;
 
 namespace TeslaCamViewer
 {
@@ -86,6 +87,8 @@ namespace TeslaCamViewer
 
             this.model.LeftStatusText = "Ready";
             InitializeComponent();
+
+            this.Title += " " + DeployedVersion();
 
             model.VideoModel.left = this.left;
             model.VideoModel.right = this.right;
@@ -323,14 +326,25 @@ namespace TeslaCamViewer
             }
         }
 
+        private string DeployedVersion()
+        {
+            string version = "v0";
+
+            if (ApplicationDeployment.IsNetworkDeployed)
+                version = "v" + ApplicationDeployment.CurrentDeployment.CurrentVersion.Major + "." + ApplicationDeployment.CurrentDeployment.CurrentVersion.Minor + "." + ApplicationDeployment.CurrentDeployment.CurrentVersion.Build + "." + ApplicationDeployment.CurrentDeployment.CurrentVersion.Revision;
+
+            return version;
+        }
+        
+
         private void about_Menu_Click(object sender, RoutedEventArgs e)
         {
-            this.ShowMessageAsync("TeslaCam Viewer V0.4.1", "TeslaCam Viewer V0.4.1 Copyright 2019 mattw\n\nSee LICENCES.txt for more information.");
+            this.ShowMessageAsync("TeslaCam Viewer " + DeployedVersion(), "TeslaCam Viewer " + DeployedVersion() + " Copyright 2019 TonyMajorDev\n\nBased on TeslaCamViewer by Mattw01\nSee LICENCES.txt for more information.");
         }
 
         private void viewOnGitHub_Menu_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/mattw01/TeslaCamViewer/");
+            System.Diagnostics.Process.Start("https://github.com/TonyMajorDev/TeslaCamViewer");
         }
 
         private void SetFullscreen(bool Enable)
